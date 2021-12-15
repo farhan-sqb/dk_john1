@@ -1,0 +1,99 @@
+<!doctype html>
+
+  <head>
+    <title>Geekybud User</title>
+
+    <link rel="stylesheet" href="build/css/intlTelInput.css">
+ 
+  </head>
+  
+  <body>
+  
+  <div class="geekybud-user">
+
+    <div class="txtb">
+      <label for="namee">Name (Optional):</label>
+      <input type="text" name="namee" value="" placeholder="JOHN SMITH" />
+    </div>
+
+    <div class="txtb">
+      <!-- Brother you have to change this Country code and phone number input with that plugin.-->
+
+      <label>Phone Number :</label>
+      <div style="display: inline-flex;">
+      <input type="text" name="" placeholder="+91" id="code"  value=""/>
+      <br />  
+      <input type="number" name="" value="" placeholder="" id="number"  required/>
+      <input type="hidden" name="full_number" id="full_number" value="" />
+      
+      </div>
+    </div>
+
+    <div class="txtb">
+      <label>Name :</label>
+      <textarea type="text" id="mess" placeholder="Your Name"></textarea>
+    </div>
+  
+    <button class="btn" >Send</button>
+   
+  </div>
+
+    <script src="build/js/intlTelInput.js"></script>
+
+    <script type="text/javascript">
+      var input = document.querySelector("#code");
+      var phone_number = window.intlTelInput(input, {
+        // allowDropdown: false,
+        // autoHideDialCode: false,
+        // autoPlaceholder: "off",
+        // dropdownContainer: document.body,
+        // excludeCountries: ["us"],
+        // formatOnDisplay: false,
+        // geoIpLookup: function(callback) {
+        //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+        //     var countryCode = (resp && resp.country) ? resp.country : "";
+        //     callback(countryCode);
+        //   });
+        // },
+        // hiddenInput: "full_number",
+        // initialCountry: "auto",
+        // localizedCountries: { 'de': 'Deutschland' },
+        // nationalMode: false,
+        // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        // placeholderNumberType: "MOBILE",
+        // preferredCountries: ['cn', 'jp'],
+        // separateDialCode: true,
+        utilsScript: "build/js/utils.js",
+      });
+      input.addEventListener("countrychange", function() {
+        let codeObject = phone_number.getSelectedCountryData();
+
+        document.getElementById("code").value = "+" + codeObject.dialCode;
+      });
+    </script>
+
+    <script type="text/javascript">
+
+    window.onload = function(){
+      document.getElementById("code").value = "+1";
+    }
+      //function myFunction() {
+
+    let numb = document.querySelector('#mess');
+    let btnOpen = document.querySelector('.btn');
+    let code = document.querySelector('#code');
+    let number = document.querySelector('#number');
+    let extra = "?text="
+    let url = "https://geekybud.com/"
+        
+    btnOpen.addEventListener('click', () => {
+
+      window.open( url + code.value + number.value + extra + numb.value)
+    
+
+    });
+  </script>
+
+  </body>
+  </html>
+  
